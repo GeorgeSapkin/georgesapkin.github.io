@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://dmesg.sapk.in/"/>
-  <updated>2016-06-13T12:20:40.534Z</updated>
+  <updated>2016-06-16T19:35:56.867Z</updated>
   <id>http://dmesg.sapk.in/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://dmesg.sapk.in/2016/06/12/device-firmware/"/>
     <id>http://dmesg.sapk.in/2016/06/12/device-firmware/</id>
     <published>2016-06-11T22:00:00.000Z</published>
-    <updated>2016-06-13T12:20:40.534Z</updated>
+    <updated>2016-06-16T19:35:56.867Z</updated>
     
-    <content type="html">&lt;p&gt;For one of my previous assignments I had to automate building ARM-based device firmware and over-the-air updates. While the recovery partition of a device was relatively small and simple and could be built using &lt;a href=&quot;https://buildroot.org/&quot;&gt;Buildroot&lt;/a&gt;, the root partition was based on &lt;a href=&quot;https://www.debian.org/releases/jessie/&quot;&gt;Debian 8 “Jessie”&lt;/a&gt;.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;strong&gt;Jun 16, 2016 update:&lt;/strong&gt; explained reasons for using Docker with QEMU.&lt;/p&gt;
+&lt;p&gt;For one of my previous assignments I had to automate building ARM-based device firmware and over-the-air updates. While the recovery partition of a device was relatively small and simple and could be built using &lt;a href=&quot;https://buildroot.org/&quot;&gt;Buildroot&lt;/a&gt;, the root partition was based on &lt;a href=&quot;https://www.debian.org/releases/jessie/&quot;&gt;Debian 8 “Jessie”&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let’s make a firmware for a hypothetical ARM-based &lt;a href=&quot;https://en.wikipedia.org/wiki/HAL_9000&quot;&gt;HAL 9000&lt;/a&gt;.&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;The goal is to describe the process overall and not to delve into device specifics. You still need to figure out the boot sequence, configure and build the kernel, set up partitioning and write custom setup scripts that work for &lt;em&gt;your&lt;/em&gt; device.&lt;/p&gt;
@@ -34,6 +35,7 @@
 &lt;li&gt;Docker&lt;/li&gt;
 &lt;li&gt;Statically-compiled &lt;a href=&quot;https://wiki.debian.org/QemuUserEmulation&quot;&gt;QEMU User Emulation&lt;/a&gt;, aka qemu-user-static.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;The reason why I used Docker and QEMU User Emulation instead of just scripting in chroot was that some software needed to be cross compiled and it had complex dependencies. So compiling it natively, thanks to QEMU dynamic &lt;a href=&quot;https://en.wikipedia.org/wiki/Binary_translation&quot;&gt;binary translation&lt;/a&gt;, in the same environment (i.e. OS, kernel and packages) where it’s going to run was the easiest.&lt;/p&gt;
 &lt;h2 id=&quot;Making-a-minimal-Debian-ARM-image-using-debootstrap-and-chroot&quot;&gt;&lt;a href=&quot;#Making-a-minimal-Debian-ARM-image-using-debootstrap-and-chroot&quot; class=&quot;headerlink&quot; title=&quot;Making a minimal Debian ARM image using debootstrap and chroot&quot;&gt;&lt;/a&gt;Making a minimal Debian ARM image using debootstrap and chroot&lt;/h2&gt;&lt;p&gt;According to &lt;a href=&quot;https://wiki.debian.org/Debootstrap&quot;&gt;debootstraps’s website&lt;/a&gt; it is:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;a tool which will install a Debian base system into a subdirectory of another, already installed system.&lt;/p&gt;
@@ -113,7 +115,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;For one of my previous assignments I had to automate building ARM-based device firmware and over-the-air updates. While the recovery partition of a device was relatively small and simple and could be built using &lt;a href=&quot;https://buildroot.org/&quot;&gt;Buildroot&lt;/a&gt;, the root partition was based on &lt;a href=&quot;https://www.debian.org/releases/jessie/&quot;&gt;Debian 8 “Jessie”&lt;/a&gt;.&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Jun 16, 2016 update:&lt;/strong&gt; explained reasons for using Docker with QEMU.&lt;/p&gt;
+&lt;p&gt;For one of my previous assignments I had to automate building ARM-based device firmware and over-the-air updates. While the recovery partition of a device was relatively small and simple and could be built using &lt;a href=&quot;https://buildroot.org/&quot;&gt;Buildroot&lt;/a&gt;, the root partition was based on &lt;a href=&quot;https://www.debian.org/releases/jessie/&quot;&gt;Debian 8 “Jessie”&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let’s make a firmware for a hypothetical ARM-based &lt;a href=&quot;https://en.wikipedia.org/wiki/HAL_9000&quot;&gt;HAL 9000&lt;/a&gt;.&lt;/p&gt;
     
     </summary>
